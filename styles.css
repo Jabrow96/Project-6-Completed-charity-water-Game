@@ -302,6 +302,106 @@ img {
     transform: translate(-50%, -50%) scale(1);
 }
 
+.streak-celebration {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 155;
+}
+
+.side-splash {
+    position: absolute;
+    top: 50%;
+    width: clamp(180px, 20vw, 260px);
+    height: clamp(180px, 20vw, 260px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transform: translateY(-50%) scale(0.4) rotate(0deg);
+}
+
+.side-splash::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, #FFF6BC 0%, #FFC907 42%, #FF902A 75%, rgba(255, 144, 42, 0) 76%);
+    clip-path: polygon(50% 0%, 60% 20%, 80% 8%, 72% 28%, 95% 34%, 74% 43%, 92% 60%, 68% 58%, 70% 82%, 50% 66%, 30% 82%, 32% 58%, 8% 60%, 26% 43%, 5% 34%, 28% 28%, 20% 8%, 40% 20%);
+    box-shadow: 0 0 26px rgba(255, 201, 7, 0.85);
+}
+
+.side-splash-left {
+    left: clamp(-56px, -4vw, -24px);
+}
+
+.side-splash-right {
+    right: clamp(-56px, -4vw, -24px);
+}
+
+.splash-label {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(0.8rem, 1.8vw, 1.1rem);
+    font-weight: 900;
+    color: #123A66;
+    text-align: center;
+    letter-spacing: 1px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.85);
+    width: 72%;
+    min-height: 54%;
+    line-height: 1.15;
+    padding: 0 6px;
+}
+
+.streak-celebration.show .side-splash-left {
+    animation: splashFlashLeft 780ms ease-out;
+}
+
+.streak-celebration.show .side-splash-right {
+    animation: splashFlashRight 780ms ease-out;
+}
+
+@keyframes splashFlashLeft {
+    0% {
+        opacity: 0;
+        transform: translateY(-50%) scale(0.4) rotate(-24deg);
+    }
+    24% {
+        opacity: 1;
+        transform: translateY(-50%) scale(1.02) rotate(6deg);
+    }
+    60% {
+        opacity: 1;
+        transform: translateY(-50%) scale(0.96) rotate(-3deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-50%) scale(1.22) rotate(18deg);
+    }
+}
+
+@keyframes splashFlashRight {
+    0% {
+        opacity: 0;
+        transform: translateY(-50%) scale(0.4) rotate(24deg);
+    }
+    24% {
+        opacity: 1;
+        transform: translateY(-50%) scale(1.02) rotate(-6deg);
+    }
+    60% {
+        opacity: 1;
+        transform: translateY(-50%) scale(0.96) rotate(3deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-50%) scale(1.22) rotate(-18deg);
+    }
+}
+
 /* HUD (Heads-Up Display) */
 .hud {
     position: absolute;
@@ -360,7 +460,54 @@ img {
 }
 
 #heartSvg {
+    width: 80px;
+    height: 80px;
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    transform-origin: center;
+}
+
+#heartSvg.heart-shake {
+    animation: heartShake 420ms ease-in-out;
+}
+
+#heartSvg.heart-pop {
+    animation: heartPop 420ms ease-out;
+}
+
+@keyframes heartShake {
+    0% {
+        transform: translateX(0) rotate(0deg) scale(1);
+    }
+    20% {
+        transform: translateX(-5px) rotate(-7deg) scale(1.07);
+    }
+    40% {
+        transform: translateX(5px) rotate(7deg) scale(1.07);
+    }
+    60% {
+        transform: translateX(-4px) rotate(-5deg) scale(1.05);
+    }
+    80% {
+        transform: translateX(4px) rotate(5deg) scale(1.03);
+    }
+    100% {
+        transform: translateX(0) rotate(0deg) scale(1);
+    }
+}
+
+@keyframes heartPop {
+    0% {
+        transform: scale(1);
+    }
+    25% {
+        transform: scale(1.22);
+    }
+    60% {
+        transform: scale(0.94);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
 /* Bucket */
@@ -633,13 +780,22 @@ img {
     }
 
     #heartSvg {
-        width: 50px;
-        height: 50px;
+        width: 64px;
+        height: 64px;
     }
 
     .speed-popup {
         font-size: 1rem;
         padding: 12px 16px;
+    }
+
+    .side-splash {
+        width: clamp(130px, 34vw, 190px);
+        height: clamp(130px, 34vw, 190px);
+    }
+
+    .splash-label {
+        font-size: clamp(0.72rem, 2.8vw, 0.95rem);
     }
 
     .bucket {

@@ -37,6 +37,7 @@ const gameElements = {
     bucket: document.getElementById('bucket'),
     gameDrops: document.getElementById('gameDrops'),
     speedPopup: document.getElementById('speedPopup'),
+    streakCelebration: document.getElementById('streakCelebration'),
     resetBtn: document.getElementById('resetBtn'),
     dropCounter: document.getElementById('dropCounter'),
     streakText: document.getElementById('streakText'),
@@ -47,6 +48,7 @@ const gameElements = {
 };
 
 let speedPopupTimeoutId = null;
+let streakCelebrationTimeoutId = null;
 
 function syncBucketSizeFromCSS() {
     const bucketRect = gameElements.bucket.getBoundingClientRect();
@@ -291,12 +293,15 @@ function gameLoop() {
                 if (gameState.streak > 0 && gameState.streak % 10 === 0) {
                     gameState.lives = Math.min(gameState.lives + 1, gameState.maxLives);
                     updateHeart();
+                    showStreakCelebration(gameState.streak);
+                    animateHeartChange('gain');
                 }
             } else {
                 // Hit bad drop
                 gameState.lives--;
                 gameState.streak = 0;
                 updateHUD();
+                animateHeartChange('loss');
 
                 if (gameState.lives <= 0) {
                     endGame();
@@ -315,6 +320,7 @@ function gameLoop() {
                 gameState.lives--;
                 gameState.streak = 0;
                 updateHUD();
+                animateHeartChange('loss');
 
                 if (gameState.lives <= 0) {
                     endGame();
@@ -365,6 +371,56 @@ function showSpeedPopup() {
     speedPopupTimeoutId = setTimeout(() => {
         gameElements.speedPopup.classList.remove('show');
     }, 1500);
+}
+
+function getWaterCelebrationMessage(streakCount) {
+    if (streakCount >= 50) return 'TIDAL FORCE!';
+    if (streakCount >= 40) return 'HYDRATION HERO!';
+    if (streakCount >= 30) return 'WELL BUILDER!';
+    if (streakCount >= 20) return 'CLEAN WATER WAVE!';
+    return 'SPLASH STREAK!';
+}
+
+function showStreakCelebration(streakCount) {
+    if (!gameElements.streakCelebration) return;
+
+    const splashLabels = gameElements.streakCelebration.querySelectorAll('.splash-label');
+    const message = getWaterCelebrationMessage(streakCount);
+
+    // Keep the exact milestone number while adding a themed message.
+    splashLabels.forEach((label) => {
+        label.textContent = `${streakCount}x ${message}`;
+    });
+
+    gameElements.streakCelebration.classList.remove('show');
+
+    // Force reflow so rapid milestones can replay the animation from the start.
+    void gameElements.streakCelebration.offsetWidth;
+
+    gameElements.streakCelebration.classList.add('show');
+
+    clearTimeout(streakCelebrationTimeoutId);
+    streakCelebrationTimeoutId = setTimeout(() => {
+        gameElements.streakCelebration.classList.remove('show');
+    }, 820);
+}
+
+function animateHeartChange(changeType) {
+    if (!gameElements.heartSvg) return;
+
+    const heartSvg = gameElements.heartSvg;
+    const className = changeType === 'gain' ? 'heart-pop' : 'heart-shake';
+
+    heartSvg.classList.remove('heart-pop', 'heart-shake');
+
+    // Force reflow so repeated life changes still replay the animation.
+    void heartSvg.offsetWidth;
+
+    heartSvg.classList.add(className);
+
+    setTimeout(() => {
+        heartSvg.classList.remove(className);
+    }, 450);
 }
 
 // ============ HUD UPDATE ============
@@ -442,6 +498,10 @@ function startGame() {
     if (gameElements.speedPopup) {
         gameElements.speedPopup.classList.remove('show');
     }
+    if (gameElements.streakCelebration) {
+        gameElements.streakCelebration.classList.remove('show');
+    }
+    clearTimeout(streakCelebrationTimeoutId);
     gameElements.bucket.style.left = gameState.bucket.x + 'px';
     gameElements.bucket.style.top = gameState.bucket.y + 'px';
     updateHUD();
@@ -474,6 +534,10 @@ function returnToStartScreen() {
     if (gameElements.speedPopup) {
         gameElements.speedPopup.classList.remove('show');
     }
+    if (gameElements.streakCelebration) {
+        gameElements.streakCelebration.classList.remove('show');
+    }
+    clearTimeout(streakCelebrationTimeoutId);
 
     switchScreen('start');
 }
