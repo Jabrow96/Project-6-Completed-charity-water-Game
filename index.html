@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charity: Water - WE NEED WATER!</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Start Screen -->
+    <div id="startScreen" class="screen active">
+        <div class="start-container">
+            <h1>WE NEED WATER!</h1>
+            <p class="brand-text">Brought to you by</p>
+            <div class="logo-placeholder">
+                <img src="img/cw_logo_horizontal.png" alt="Charity: Water Logo" class="charity-logo">
+            </div>
+            
+            <!-- Animated background with falling drops -->
+            <div class="drop-preview-container">
+                <div id="previewDrops"></div>
+            </div>
+            
+            <button id="collectBtn" class="collect-btn">
+                <span class="star-emoji">⭐</span>
+                Collect?
+                <span class="star-emoji">⭐</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Instructions Screen -->
+    <div id="instructionScreen" class="screen">
+        <div class="instruction-container">
+            <div class="splash-text">
+                <h2>Charity: Water's Mission</h2>
+                <p>Provide clean water to all!</p>
+                <div class="instruction-box">
+                    <p><strong>How to Play:</strong></p>
+                    <p>Collect 💧 <span style="color: #2E9DF7;">BLUE drops</span> = GOOD water</p>
+                    <p>Avoid 🌧️ <span style="color: #4a4a4a;">DARK drops</span> = CONTAMINATED water</p>
+                    <p>Drag Jerry around to catch drops!</p>
+                </div>
+            </div>
+            <button id="continueBtn" class="continue-btn">Tap to Continue</button>
+        </div>
+    </div>
+
+    <!-- Countdown Screen -->
+    <div id="countdownScreen" class="screen">
+        <div class="countdown-container">
+            <div id="countdownText" class="countdown-text">3</div>
+        </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="gameScreen" class="screen">
+        <div class="game-container">
+            <!-- Background with falling drops -->
+            <div class="game-background">
+                <div id="gameDrops" class="drops-container"></div>
+            </div>
+
+            <div id="speedPopup" class="speed-popup">Very Good! The drops get faster!</div>
+
+            <!-- HUD: Top-right info -->
+            <div class="hud">
+                <div class="hud-item">
+                    <span class="label">Drops:</span>
+                    <span id="dropCounter">0</span>
+                </div>
+                <div class="hud-item">
+                    <span class="label">Streak:</span>
+                    <span id="streakText">0</span>
+                </div>
+                <button id="resetBtn" class="hud-reset-btn">Restart</button>
+            </div>
+
+            <!-- Heart indicator top-right -->
+            <div id="heartIndicator" class="heart-indicator">
+                <svg id="heartSvg" width="60" height="60" viewBox="0 0 60 60">
+                    <path d="M30 50 C 10 40, 5 30, 5 20 C 5 10, 12 5, 18 5 C 24 5, 30 10, 30 10 C 30 10, 36 5, 42 5 C 48 5, 55 10, 55 20 C 55 30, 50 40, 30 50 Z" 
+                          fill="#F5402C" stroke="#8B0000" stroke-width="2"/>
+                </svg>
+            </div>
+
+            <!-- Water Can -->
+            <img id="bucket" class="bucket" src="img/water-can-transparent.png" alt="Water Can" />
+        </div>
+    </div>
+
+    <!-- End Screen -->
+    <div id="endScreen" class="screen">
+        <div class="end-container">
+            <h1>GAME OVER</h1>
+            <div class="broken-heart-emoji">💔</div>
+            <div class="final-score">
+                <p>You got a score of <span id="finalScore">0</span>!</p>
+            </div>
+            <div class="end-info">
+                <h3>Why Charity: Water?</h3>
+                <p>
+                    Charity: Water brings clean, safe drinking water to people in Africa, South America, and Asia who lack access to it.
+                    Over 2 billion people worldwide live without safe drinking water. Your contributions help build wells and water systems
+                    that change lives and entire communities.
+                </p>
+                <p><strong>Learn more and help:</strong></p>
+                <a href="https://www.charitywater.org" target="_blank" rel="noopener" class="charity-link">
+                    Visit Charity: Water
+                </a>
+            </div>
+            <button id="retryBtn" class="retry-btn">Try Again?</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
