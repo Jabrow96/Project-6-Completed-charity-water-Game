@@ -25,7 +25,7 @@ Secondary Colors:
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Proxima Nova', Georgia, serif;
     overflow: hidden;
     background: linear-gradient(135deg, #2E9DF7 0%, #8BD1CB 100%);
     height: 100vh;
@@ -391,14 +391,15 @@ img {
     min-height: 54%;
     line-height: 1.15;
     padding: 0 6px;
+    transform: translateY(-8%);
 }
 
 .streak-celebration.show .side-splash-left {
-    animation: splashFlashLeft 780ms ease-out;
+    animation: splashFlashLeft 2500ms ease-out;
 }
 
 .streak-celebration.show .side-splash-right {
-    animation: splashFlashRight 780ms ease-out;
+    animation: splashFlashRight 2500ms ease-out;
 }
 
 @keyframes splashFlashLeft {
@@ -406,11 +407,11 @@ img {
         opacity: 0;
         transform: translateY(-50%) scale(0.4) rotate(-24deg);
     }
-    24% {
+    10% {
         opacity: 1;
         transform: translateY(-50%) scale(1.02) rotate(6deg);
     }
-    60% {
+    88% {
         opacity: 1;
         transform: translateY(-50%) scale(0.96) rotate(-3deg);
     }
@@ -425,11 +426,11 @@ img {
         opacity: 0;
         transform: translateY(-50%) scale(0.4) rotate(24deg);
     }
-    24% {
+    10% {
         opacity: 1;
         transform: translateY(-50%) scale(1.02) rotate(-6deg);
     }
-    60% {
+    88% {
         opacity: 1;
         transform: translateY(-50%) scale(0.96) rotate(3deg);
     }
@@ -448,7 +449,7 @@ img {
     flex-direction: column;
     gap: 15px;
     z-index: 100;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.6);
     padding: 15px 25px;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -628,20 +629,22 @@ img {
 /* Drops */
 .drop {
     position: absolute;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
+    width: 26px;
+    height: 36px;
     pointer-events: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .drop.good {
-    background: linear-gradient(135deg, #2E9DF7 0%, #1E90FF 100%);
-    box-shadow: 0 2px 8px rgba(46, 157, 247, 0.6);
+    background-image: url('img/waterdrop.webp');
+    filter: drop-shadow(0 2px 7px rgba(46, 157, 247, 0.5));
 }
 
 .drop.bad {
-    background: linear-gradient(135deg, #666 0%, #333 100%);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+    background-image: url('img/darkwaterdrop.webp');
+    filter: drop-shadow(0 2px 7px rgba(0, 0, 0, 0.55));
 }
 
 @keyframes dropFall {
@@ -662,8 +665,10 @@ img {
     background: rgba(255, 255, 255, 0.95);
     padding: clamp(18px, 3vh, 40px) clamp(16px, 3vw, 36px);
     border-radius: 20px;
-    max-width: 600px;
-    width: min(92vw, 600px);
+    max-width: 660px;
+    width: min(94vw, 660px);
+    max-height: 88vh;
+    overflow-y: auto;
     text-align: center;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
@@ -700,14 +705,16 @@ img {
 }
 
 .end-charity-image {
-    width: 100%;
+    width: auto;
+    max-width: 100%;
     height: auto;
-    max-height: none;
+    max-height: min(24vh, 190px);
     object-fit: contain;
     border-radius: 12px;
     border: 3px solid #FFC907;
     margin: 4px 0 12px;
-    display: block;
+    display: inline-block;
+    vertical-align: top;
 }
 
 #finalScore {
@@ -813,7 +820,7 @@ img {
     }
 
     .end-container {
-        max-width: 90%;
+        max-width: 94%;
     }
 
     .hud {

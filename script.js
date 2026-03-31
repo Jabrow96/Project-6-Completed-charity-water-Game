@@ -84,8 +84,8 @@ function createDrop() {
     return {
         x,
         y: -30,
-        width: 20,
-        height: 30,
+        width: 26,
+        height: 36,
         type: dropType,
         speed,
         element: null,
@@ -405,7 +405,7 @@ function showStreakCelebration(streakCount) {
     clearTimeout(streakCelebrationTimeoutId);
     streakCelebrationTimeoutId = setTimeout(() => {
         gameElements.streakCelebration.classList.remove('show');
-    }, 820);
+    }, 2820);
 }
 
 function animateHeartChange(changeType) {
