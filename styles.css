@@ -100,15 +100,39 @@ img {
 }
 
 /* Drop Preview Container (Start Screen) */
+.start-preview-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin: 20px auto;
+}
+
 .drop-preview-container {
     position: relative;
     width: 300px;
     height: 300px;
-    margin: 20px auto;
     border: 3px solid #FFC907;
     border-radius: 10px;
     background: linear-gradient(180deg, #B3E5FC 0%, #E1F5FE 100%);
     overflow: hidden;
+}
+
+.charity-preview-container {
+    width: 300px;
+    height: 300px;
+    border: 3px solid #FFC907;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.charity-preview-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: right center;
+    display: block;
 }
 
 .collect-btn {
@@ -268,13 +292,26 @@ img {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(180deg, #87CEEB 0%, #B3E5FC 50%, #E1F5FE 100%);
+    background: #b3e5fc;
+}
+
+.game-background::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('img/waterbackground.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.65;
+    z-index: 0;
 }
 
 .drops-container {
     position: relative;
     width: 100%;
     height: 100%;
+    z-index: 1;
 }
 
 .speed-popup {
@@ -662,6 +699,17 @@ img {
     font-weight: bold;
 }
 
+.end-charity-image {
+    width: 100%;
+    height: auto;
+    max-height: none;
+    object-fit: contain;
+    border-radius: 12px;
+    border: 3px solid #FFC907;
+    margin: 4px 0 12px;
+    display: block;
+}
+
 #finalScore {
     color: #FFC907;
     font-size: clamp(1.4rem, 3.2vh, 2rem);
@@ -750,8 +798,13 @@ img {
     }
 
     .drop-preview-container {
-        width: min(80vw, 260px);
-        height: min(80vw, 260px);
+        width: min(42vw, 180px);
+        height: min(42vw, 180px);
+    }
+
+    .charity-preview-container {
+        width: min(42vw, 180px);
+        height: min(42vw, 180px);
     }
 
     .instruction-container {

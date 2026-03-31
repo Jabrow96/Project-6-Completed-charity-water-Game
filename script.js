@@ -129,10 +129,13 @@ function spawnDropPreviewDrops() {
     const container = gameElements.previewDrops;
     if (!container) return;
 
+    const containerWidth = container.clientWidth || 300;
+    const containerHeight = container.clientHeight || 300;
+
     const drop = createDrop();
     const dropEl = document.createElement('div');
     dropEl.className = `drop ${drop.type}`;
-    dropEl.style.left = drop.x % 300 + 'px';
+    dropEl.style.left = drop.x % containerWidth + 'px';
     dropEl.style.top = '-30px';
 
     container.appendChild(dropEl);
@@ -143,7 +146,7 @@ function spawnDropPreviewDrops() {
         y += 3;
         dropEl.style.top = y + 'px';
 
-        if (y > 300) {
+        if (y > containerHeight) {
             clearInterval(interval);
             dropEl.remove();
         }
@@ -567,8 +570,15 @@ function spawnPreviewDropsLoop() {
     }, 1000);
 }
 
+function preloadGameImages() {
+    // Fallback preload in JS so the game background is ready before gameplay starts.
+    const waterBackgroundImage = new Image();
+    waterBackgroundImage.src = 'img/waterbackground.jpg';
+}
+
 // Initialize on page load
 window.addEventListener('DOMContentLoaded', () => {
+    preloadGameImages();
     switchScreen('start');
     syncBucketSizeFromCSS();
     gameElements.bucket.style.left = gameState.bucket.x + 'px';

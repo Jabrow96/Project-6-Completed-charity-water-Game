@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Charity: Water - WE NEED WATER!</title>
+    <link rel="preload" as="image" href="img/waterbackground.jpg">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -16,9 +17,14 @@
                 <img src="img/cw_logo_horizontal.png" alt="Charity: Water Logo" class="charity-logo">
             </div>
             
-            <!-- Animated background with falling drops -->
-            <div class="drop-preview-container">
-                <div id="previewDrops"></div>
+            <!-- Animated preview and charity photo side by side -->
+            <div class="start-preview-row">
+                <div class="drop-preview-container">
+                    <div id="previewDrops"></div>
+                </div>
+                <div class="charity-preview-container">
+                    <img src="img/charity1.jpeg" alt="Charity: Water community" class="charity-preview-image">
+                </div>
             </div>
             
             <button id="collectBtn" class="collect-btn">
@@ -106,6 +112,7 @@
             <div class="final-score">
                 <p>You got a score of <span id="finalScore">0</span>!</p>
             </div>
+            <img src="img/charity2.jpg" alt="Charity: Water impact" class="end-charity-image">
             <div class="end-info">
                 <h3>Why Charity: Water?</h3>
                 <p>
